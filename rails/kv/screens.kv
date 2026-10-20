@@ -1,0 +1,166 @@
+# Экраны на KivyMD 2.0 (бывшие <Menu>, <Game> из widgets.kv и Python-код lvls.py).
+
+<MenuScreen>:
+    md_bg_color: app.theme_cls.backgroundColor
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDTopAppBar:
+            type: "small"
+
+            MDTopAppBarTrailingButtonContainer:
+
+                MDActionTopAppBarButton:
+                    icon: app.music_icon
+                    on_release: app.toggle_music()
+
+                MDActionTopAppBarButton:
+                    icon: "theme-light-dark"
+                    on_release: app.toggle_theme()
+
+        MDFloatLayout:
+
+            MDBoxLayout:
+                orientation: "vertical"
+                adaptive_size: True
+                spacing: dp(20)
+                pos_hint: {"center_x": .5, "center_y": .55}
+
+                MDIcon:
+                    icon: "train"
+                    theme_font_size: "Custom"
+                    font_size: "96sp"
+                    pos_hint: {"center_x": .5}
+
+                MDLabel:
+                    text: app.tr("app_title")
+                    font_style: "Display"
+                    role: "medium"
+                    halign: "center"
+                    adaptive_size: True
+                    pos_hint: {"center_x": .5}
+
+                MDButton:
+                    style: "filled"
+                    pos_hint: {"center_x": .5}
+                    on_release: app.go_levels()
+
+                    MDButtonIcon:
+                        icon: "play"
+
+                    MDButtonText:
+                        text: app.tr("play")
+
+                MDButton:
+                    style: "outlined"
+                    pos_hint: {"center_x": .5}
+                    on_release: app.stop()
+
+                    MDButtonIcon:
+                        icon: "exit-to-app"
+
+                    MDButtonText:
+                        text: app.tr("exit")
+
+<LevelCard>:
+    style: "filled"
+    theme_bg_color: "Custom"
+    md_bg_color: app.theme_cls.primaryContainerColor
+    size_hint: None, None
+    size: dp(88), dp(88)
+    radius: [dp(20)]
+    on_release: app.open_level(root.level)
+
+    MDLabel:
+        text: str(root.number)
+        halign: "center"
+        valign: "center"
+        font_style: "Headline"
+        role: "medium"
+        theme_text_color: "Custom"
+        text_color: app.theme_cls.onPrimaryContainerColor
+
+<LevelsScreen>:
+    md_bg_color: app.theme_cls.backgroundColor
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDTopAppBar:
+            type: "small"
+
+            MDTopAppBarLeadingButtonContainer:
+
+                MDActionTopAppBarButton:
+                    icon: "arrow-left"
+                    on_release: app.go_menu()
+
+            MDTopAppBarTitle:
+                text: app.tr("levels")
+
+        MDLabel:
+            text: root.message
+            size_hint_y: None
+            height: (self.texture_size[1] + dp(24)) if self.text else 0
+            padding: dp(16), dp(8)
+            theme_text_color: "Error"
+
+        MDScrollView:
+            id: scroll
+            do_scroll_x: False
+
+            MDGridLayout:
+                id: grid
+                cols: 3
+                adaptive_height: True
+                spacing: dp(12)
+
+<GameScreen>:
+    md_bg_color: app.theme_cls.backgroundColor
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDTopAppBar:
+            type: "small"
+
+            MDTopAppBarLeadingButtonContainer:
+
+                MDActionTopAppBarButton:
+                    icon: "arrow-left"
+                    on_release: app.go_levels()
+
+            MDTopAppBarTitle:
+                text: root.title
+
+            MDTopAppBarTrailingButtonContainer:
+
+                MDActionTopAppBarButton:
+                    icon: "help-circle-outline"
+                    on_release: root.show_hint()
+
+                MDActionTopAppBarButton:
+                    icon: "fit-to-screen-outline"
+                    on_release: root.refit()
+
+                MDActionTopAppBarButton:
+                    icon: "restart"
+                    on_release: root.restart()
+
+        MDFloatLayout:
+
+            Playfield:
+                id: playfield
+
+                Board:
+                    id: board
+
+            MDFabButton:
+                icon: "stop" if root.running else "play"
+                theme_bg_color: "Custom"
+                md_bg_color: app.theme_cls.errorContainerColor if root.running else app.theme_cls.primaryColor
+                theme_icon_color: "Custom"
+                icon_color: app.theme_cls.onErrorContainerColor if root.running else app.theme_cls.onPrimaryColor
+                pos_hint: {"right": .96, "y": .03}
+                on_release: root.toggle_run()

@@ -1,0 +1,122 @@
+# Оформление игровых виджетов (бывший <Box> из widgets.kv).
+# Размеры тут — «виртуальные»: масштаб под экран делает ScatterPlane.
+
+<Playfield>:
+    canvas.before:
+        Color:
+            rgba: app.theme_cls.surfaceContainerLowestColor
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    Image:
+        source: root.backdrop
+        opacity: .4 if root.backdrop else 0
+        fit_mode: "cover"
+        pos: root.pos
+        size: root.size
+
+<Cell>:
+    canvas.before:
+        Color:
+            rgba: self.tile_color
+        Rectangle:
+            pos: self.pos
+            size: self.size
+        Color:
+            rgba: self.line_color
+        Line:
+            rectangle: self.x, self.y, self.width, self.height
+            width: 1
+
+<BlockCell>:
+    canvas.after:
+        Color:
+            rgba: 1, 1, 1, .25
+        Line:
+            points: self.x + 18, self.y + 18, self.right - 18, self.top - 18
+            width: 3
+        Line:
+            points: self.x + 18, self.top - 18, self.right - 18, self.y + 18
+            width: 3
+
+<Marker>:
+    canvas:
+        Color:
+            rgba: self.tint
+        Rectangle:
+            pos: self.pos
+            size: self.size
+        Color:
+            rgba: self.edge_color
+        Line:
+            points: self.bar_points
+            width: 3
+        Triangle:
+            points: self.arrow_points
+        Color:
+            rgba: self.ring_color
+        Line:
+            circle: self.center_x, self.center_y, 13
+            width: 2
+
+<TraySlot>:
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, .07
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [14]
+        Color:
+            rgba: 1, 1, 1, .3
+        Line:
+            rounded_rectangle: self.x, self.y, self.width, self.height, 14
+            width: 1.2
+
+<TrayBadge>:
+    canvas.before:
+        Color:
+            rgba: .13, .5, .95, 1
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [13]
+
+<Piece>:
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, .38 if self.held else 0
+        Rectangle:
+            pos: self.x + 5, self.y - 5
+            size: self.size
+        PushMatrix
+        Rotate:
+            angle: self.visual_angle
+            origin: self.center
+    canvas.after:
+        PopMatrix
+        # рамки сторон: зелёная — соединена, красная — закрыта, синяя — откроется при переключении
+        Color:
+            rgba: self.frame_down
+        Line:
+            points: [self.x, self.y + 1, self.right, self.y + 1]
+            width: 1.6
+        Color:
+            rgba: self.frame_up
+        Line:
+            points: [self.x, self.top - 1, self.right, self.top - 1]
+            width: 1.6
+        Color:
+            rgba: self.frame_left
+        Line:
+            points: [self.x + 1, self.y, self.x + 1, self.top]
+            width: 1.6
+        Color:
+            rgba: self.frame_right
+        Line:
+            points: [self.right - 1, self.y, self.right - 1, self.top]
+            width: 1.6
+    Image:
+        source: root.source
+        pos: root.pos
+        size: root.size
