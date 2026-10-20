@@ -1,0 +1,233 @@
+# name = "main_lvls"
+
+# ==========================================
+# РІВЕНЬ 1
+# ==========================================
+[[levels]]
+id = 1
+lab_text = """
+Перетягніть з початку(жовтий)
+    до кінця(синій) поїзд
+Завдяки рейкам(забавне слово)"""
+
+[[levels.pazls]]
+type = ""
+count = 3
+
+
+# ==========================================
+# РІВЕНЬ 2
+# ==========================================
+
+[[levels]]
+id = 2
+cols = 5
+rows = 4
+lab_text = "Натисніть 2 рази щоб перевернути пазл\nНовий пазл"
+
+[[levels.trains]]
+start = { pos = [0, 2] }
+end = { pos = [4, 1] }
+
+[[levels.pazls]]
+type = ""
+count = 4
+
+[[levels.pazls]]
+type = "Rotation"
+count = 2
+
+
+# ==========================================
+# РІВЕНЬ 3
+# ==========================================
+
+[[levels]]
+id = 3
+cols = 5
+rows = 4
+lab_text = "Блок який блокує пазл"
+
+[levels.stations]
+"(2, 1)" = "Block"
+
+[[levels.trains]]
+start = { pos = [0, 1] }
+end = { pos = [4, 1] }
+
+[[levels.pazls]]
+type = ""
+count = 3
+
+[[levels.pazls]]
+type = "Rotation"
+count = 4
+
+
+# ==========================================
+# РІВЕНЬ 4
+# ==========================================
+
+[[levels]]
+id = 4
+cols = 5
+rows = 4
+lab_text = "Треба пройти по всім станціям\nстанція поміченна біловатим"
+
+[[levels.trains]]
+start = { pos = [0, 1] }
+end = { pos = [4, 1] }
+points = [[2, 2]]
+
+[[levels.pazls]]
+type = ""
+count = 5
+
+[[levels.pazls]]
+type = "Rotation"
+count = 4
+
+
+# ==========================================
+# РІВЕНЬ 5
+# ==========================================
+
+[[levels]]
+id = 5
+cols = 5
+rows = 5
+lab_text = "Новий пазл-перехрестя"
+
+[levels.stations]
+"(1, 1)" = "Block"
+"(1, 3)" = "Block"
+"(3, 1)" = "Block"
+"(3, 3)" = "Block"
+
+[[levels.trains]]
+start = { pos = [0, 4] }
+end = { pos = [4, 0], side_options = ["Down", "Up"] }
+points = [[1, 2], [2, 1], [2, 3], [3, 2]]
+
+[[levels.pazls]]
+type = ""
+count = 10
+
+[[levels.pazls]]
+type = "Rotation"
+count = 5
+
+[[levels.pazls]]
+type = "Crossroads"
+count = 1
+
+
+# ==========================================
+# РІВЕНЬ 6
+# ==========================================
+
+[[levels]]
+id = 6
+cols = 5
+rows = 5
+lab_text = """
+    Новий пазл
+Його можно міняти підчас їзди
+Міняти 1 кліком по пазлу
+(вона позначенна 
+синьою полоскою зверху)"""
+
+[levels.stations]
+"(1, 1)" = "Block"
+"(1, 3)" = "Block"
+"(3, 1)" = "Block"
+"(3, 3)" = "Block"
+
+[[levels.trains]]
+start = { pos = [2, 2], side = "Up" }
+end = { pos = [4, 2] }
+points = [[0, 0], [0, 4], [2, 4]]
+
+[[levels.pazls]]
+type = ""
+count = 9
+
+[[levels.pazls]]
+type = "Rotation"
+count = 4
+
+[[levels.pazls]]
+type = "Crossroads"
+count = 1
+
+[[levels.pazls]]
+type = "Rowation"
+count = 1
+
+
+# ==========================================
+# РІВЕНЬ 7
+# ==========================================
+
+[[levels]]
+id = 7
+cols = 5
+rows = 3
+
+[[levels.trains]]
+start = { pos = [0, 1] }
+end = { pos = [4, 1] }
+points = [[1, 0], [1, 2], [3, 0], [3, 2]]
+
+[[levels.pazls]]
+type = ""
+count = 12
+
+[[levels.pazls]]
+type = "Rotation"
+count = 4
+
+[[levels.pazls]]
+type = "Crossroads"
+count = 1
+
+[[levels.pazls]]
+type = "Rowation"
+count = 2
+
+
+# ==========================================
+# РІВЕНЬ 8
+# ==========================================
+
+[[levels]]
+id = 8
+cols = 5
+rows = 5
+
+[levels.stations]
+"(1, 1)" = "Block"
+"(1, 3)" = "Block"
+"(3, 1)" = "Block"
+"(3, 3)" = "Block"
+
+[[levels.trains]]
+start = { pos = [2, 2], side = "Up" }
+end = { pos = [4, 2] }
+points = [[0, 0], [0, 4], [4, 4], [4, 0]]
+
+[[levels.pazls]]
+type = ""
+count = 12
+
+[[levels.pazls]]
+type = "Rotation"
+count = 4
+
+[[levels.pazls]]
+type = "Crossroads"
+count = 1
+
+[[levels.pazls]]
+type = "Rowation"
+count = 2
